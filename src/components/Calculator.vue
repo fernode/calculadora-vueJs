@@ -49,6 +49,7 @@ export default {
     append(number) {
       if (this.operatorClicked) {
         this.clear();
+        this.operatorClicked = false;
       }
       this.current = `${this.current}${number}`;
     },
@@ -78,7 +79,10 @@ export default {
       this.setPrevious();
     },
     equal() {
-      this.current = this.operator(this.previous, this.current);
+      this.current = this.operator(
+        parseFloat(this.previous),
+        parseFloat(this.current)
+      );
     },
   },
 };
