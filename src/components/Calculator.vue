@@ -3,23 +3,23 @@
     <div class="display">{{ current || 0 }}</div>
     <div class="btn" @click="clear">AC</div>
     <div class="btn" @click="sign">+/-</div>
-    <div class="btn">%</div>
-    <div class="btn operator">÷</div>
-    <div class="btn">7</div>
-    <div class="btn">8</div>
-    <div class="btn">9</div>
-    <div class="btn operator">x</div>
-    <div class="btn">4</div>
-    <div class="btn">5</div>
-    <div class="btn">6</div>
-    <div class="btn operator">-</div>
-    <div class="btn">1</div>
-    <div class="btn">2</div>
-    <div class="btn">3</div>
-    <div class="btn operator">+</div>
-    <div class="btn zero">0</div>
-    <div class="btn">.</div>
-    <div class="btn operator">=</div>
+    <div class="btn" @click="percent">%</div>
+    <div class="btn operator" @click="divide">÷</div>
+    <div class="btn" @click="append('7')">7</div>
+    <div class="btn" @click="append('8')">8</div>
+    <div class="btn" @click="append('9')">9</div>
+    <div class="btn operator" @click="times">x</div>
+    <div class="btn" @click="append('4')">4</div>
+    <div class="btn" @click="append('5')">5</div>
+    <div class="btn" @click="append('6')">6</div>
+    <div class="btn operator" @click="minus">-</div>
+    <div class="btn" @click="append('1')">1</div>
+    <div class="btn" @click="append('2')">2</div>
+    <div class="btn" @click="append('3')">3</div>
+    <div class="btn operator" @click="plus">+</div>
+    <div class="btn zero" @click="append($event)">0</div>
+    <div class="btn" @click="dot()">.</div>
+    <div class="btn operator" @click="equal">=</div>
   </div>
 </template>
 
@@ -39,6 +39,17 @@ export default {
         this.current.charAt(0) === "-"
           ? this.current.slice(1)
           : `${-this.current}`;
+    },
+    percent() {
+      this.current = `${parseFloat(this.current) / 100}`;
+    },
+    append(number) {
+      this.current = `${this.current}${number}`;
+    },
+    dot() {
+      if (this.current.indexOf(".") === -1) {
+        this.append(".");
+      }
     },
   },
 };
